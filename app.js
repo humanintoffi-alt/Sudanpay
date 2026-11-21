@@ -36,7 +36,7 @@ $("#go").onclick = async () => {
     if (o.e) { $("#go").disabled = false; return set("#m", o.e); }
     o.refund = refund;
     localStorage.setItem("last", JSON.stringify(o));
-    show(o);
+    location.href = "order.html?id=" + o.id;
   } catch { $("#go").disabled = false; set("#m", "فشل إنشاء الطلب"); }
 };
 function show(o) {
@@ -80,8 +80,7 @@ $("#back").onclick = async () => {
 
 $("#new").onclick = () => { $("#view").hidden = true; $("#swap").hidden = false; $("#a").value = ""; $("#m").textContent = "أدخل مبلغاً لعرض السعر"; $("#go").disabled = true; };
 
-const last = localStorage.getItem("last");
-if (last) { try { show(JSON.parse(last)); } catch (e) {} }
+
 
 const ICON = { BTC:["btc","₿"], USDTTRC:["usdt","₮"], ETH:["eth","Ξ"], XMR:["xmr","ɱ"], TRX:["trx","⟁"] };
 function paint(sel, ic) {
