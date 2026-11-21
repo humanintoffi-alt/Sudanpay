@@ -125,11 +125,17 @@ const bd = v => { for (const [k, l] of [["C-CHAIN","AVAX"],["OPTIMISM","OP"],["A
 const POP = ["BTC","BNBBSC","ETH","USDTETH","USDTTRX","XMR"];
 let target = "#f";
 
-function row(v, label) {
+const NETN = v => { for (const [k, l] of [["C-CHAIN","C-Chain"],["OPTIMISM","Optimism"],
+["ARBITRUM","Arbitrum"],["POLYGON","Polygon"],["BASE","Base"],["TRX","TRC20"],["ETH","ERC20"],
+["BSC","BEP20"],["SOL","Solana"],["TON","TON"],["LN","Lightning"]]) if (v.endsWith(k)) return l; return ""; };
+const tick = v => { const s = v.replace(/(C-CHAIN|OPTIMISM|ARBITRUM|POLYGON|BASE|TRX|ETH|BSC|SOL|TON|LN)$/, ""); return s || v; };
+function row(v) {
   const d = document.createElement("div"); d.className = "item";
-  const [c, g] = ICON[v] || ["btc", "?"]; const bg = bd(v);
+  const [c, g] = ICON[v] || ["btc", "?"];
+  const n = NETN(v), bg = bd(v);
   d.innerHTML = '<span class="ico ' + c + '">' + g + '</span><span class="nm">' + nm(v) +
-    '</span><b>' + v + '</b>' + (bg ? '<em class="bdg">' + bg + '</em>' : '');
+    (n ? ' <small>(' + n + ')</small>' : '') + '</span><span class="rt"><b>' + tick(v) + '</b>' +
+    (bg ? '<em class="bdg">' + bg + '</em>' : '') + '</span>';
   d.onclick = () => { $(target).value = v; $(target).dispatchEvent(new Event("change")); closeSheet(); };
   return d;
 }

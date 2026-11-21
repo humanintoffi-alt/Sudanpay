@@ -68,19 +68,20 @@ button.go:disabled{opacity:.42;box-shadow:none;cursor:default}
 color:var(--sand);font:700 13px inherit;padding:9px 11px;max-width:52%;cursor:pointer}
 .sheet{position:fixed;inset:0;z-index:50;background:rgba(8,6,10,.94);backdrop-filter:blur(20px);
 display:flex;flex-direction:column;padding:16px;max-width:560px;margin:auto}
-.sheet input{background:rgba(240,231,216,.07);border:1px solid var(--line);border-radius:14px;
-padding:14px;color:var(--sand);font:inherit}
+.sheet input{background:none;border:0;border-bottom:1px solid rgba(255,255,255,.14);border-radius:0;padding:14px 4px;color:var(--sand);font:inherit;font-size:15px}
+.sheet input:focus{outline:0;border-color:#E23B2E}
 #list{margin-top:12px;overflow-y:auto;flex:1}
 .grp{font-size:11px;opacity:.45;margin:14px 4px 6px;letter-spacing:.08em}
-.item{display:flex;align-items:center;gap:10px;padding:11px 6px;border-radius:12px;cursor:pointer}
+.item{display:flex;align-items:center;gap:12px;padding:13px 4px;cursor:pointer;border-bottom:1px solid rgba(240,231,216,.06)}
 .item:active{background:rgba(240,231,216,.08)}
-.item .ico{width:28px;height:28px;font-size:10px}
-.item em{font-style:normal;font-size:12px;opacity:.45;margin-inline-start:auto}
+.item .ico{width:36px;height:36px;font-size:12px}
+.nm{flex:1;font-size:15px}.nm small{opacity:.5;font-size:12.5px}
+.rt{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.rt b{font-size:14px;font-weight:800;opacity:.9}
 .x{position:absolute;top:16px;left:16px;background:none;border:0;color:var(--sand);font-size:22px;cursor:pointer}
 .rate{font-size:11px;opacity:.45;padding:7px 8px 0}
-.nm{flex:1;font-size:14px}.item b{font-size:12px;opacity:.85}
-.bdg{font-style:normal;font-size:9px;font-weight:800;background:rgba(240,231,216,.14);
-border-radius:5px;padding:2px 5px;letter-spacing:.04em}
+
+.bdg{font-style:normal;font-size:8.5px;font-weight:800;background:rgba(255,255,255,.16);border-radius:5px;padding:2px 6px;letter-spacing:.05em}
 </style></head><body>
 <video class="scene" autoplay muted loop playsinline preload="auto"
  poster="https://cdn.pixabay.com/video/2022/12/28/144575-784867452_tiny.jpg">
@@ -151,4 +152,4 @@ border-radius:5px;padding:2px 5px;letter-spacing:.04em}
 <p class="foot">التنفيذ والاسترداد عبر FixedFloat<br>🇸🇩 صُنع للسودان</p>
 </main>
 <div class="sheet hid" id="sheet"><button class="x" id="x">✕</button><input id="q" placeholder="اكتب عملة أو شبكة…" autocomplete="off"><div id="list"></div></div>
-<script src="app.js?v=15"></script></body></html>
+<script src="app.js?v=16"></script></body></html>
