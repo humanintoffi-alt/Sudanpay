@@ -25,7 +25,7 @@ $("#flip").onclick = () => { const v = $("#f").value; $("#f").value = $("#t").va
 
 $("#go").onclick = async () => {
   const payout = $("#addr").value.trim(), refund = $("#refund").value.trim();
-  if (!payout) return set("#m", "أدخل عنوان الاستلام");
+  if (!/^[A-Za-z0-9:_\-.]{8,160}$/.test(payout)) return set("#m", "عنوان الاستلام غير صالح");
   $("#go").disabled = true;
   try {
     const r = await fetch(API + "/order", { method: "POST",
@@ -122,6 +122,7 @@ const nm = v => { const k = Object.keys(NAMES).find(x => v.startsWith(x)); retur
 const bd = v => { for (const [k, l] of [["C-CHAIN","AVAX"],["OPTIMISM","OP"],["ARBITRUM","ARB"],
 ["POLYGON","POL"],["BASE","BASE"],["TRX","TRX"],["ETH","ETH"],["BSC","BSC"],["SOL","SOL"],
 ["TON","TON"],["LN","LN"]]) if (v.endsWith(k)) return l; return ""; };
+const AR = {Bitcoin:"بيتكوين",Ethereum:"إيثيريوم",Tron:"ترون",Solana:"سولانا",Polygon:"بوليجون",Arbitrum:"أربيتروم",Optimism:"أوبتيميزم",Avalanche:"أفالانش",Other:"أخرى",BNB:"بي إن بي",Base:"بيس"};
 const POP = ["BTC","BNBBSC","ETH","USDTETH","USDTTRX","XMR"];
 let target = "#f";
 
@@ -152,13 +153,14 @@ function row(v) {
 function buildList(f) {
   const L = $("#list"); L.innerHTML = ""; f = (f || "").trim().toLowerCase();
   if (!f) {
-    const h = document.createElement("div"); h.className = "grp"; h.textContent = "شائعة"; L.append(h);
+    const h = document.createElement("div"); h.className = "grp"; h.textContent = "Popular currencies"; L.append(h);
     POP.forEach(v => L.append(row(v)));
-    const h2 = document.createElement("div"); h2.className = "grp"; h2.textContent = "كل العملات"; L.append(h2);
+    const h2 = document.createElement("div"); h2.className = "grp"; h2.textContent = "All currencies"; L.append(h2);
   }
   for (const g of $("#f").querySelectorAll("optgroup")) for (const o of g.children) {
     const v = o.value;
-    if (f && !(v.toLowerCase().includes(f) || nm(v).toLowerCase().includes(f) || g.label.toLowerCase().includes(f))) continue;
+    const hay = (v + " " + nm(v) + " " + NETN(v) + " " + tick(v) + " " + g.label + " " + (AR[g.label] || "")).toLowerCase();
+    if (f && !hay.includes(f)) continue;
     if (!f && POP.includes(v)) continue;
     L.append(row(v));
   }
