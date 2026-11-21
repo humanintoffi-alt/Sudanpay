@@ -109,3 +109,30 @@ for (const sel of ["#f", "#t"]) for (const o of $(sel).options) {
 }
 paint("#f", "#fi"); paint("#t", "#ti");
 $("#a").addEventListener("input", () => $("#out").value = "");
+
+let target = "#f";
+function buildList(f) {
+  const L = $("#list"); L.innerHTML = ""; f = (f || "").trim().toLowerCase();
+  for (const g of $("#f").querySelectorAll("optgroup")) {
+    const items = [...g.children].filter(o =>
+      !f || o.value.toLowerCase().includes(f) || g.label.toLowerCase().includes(f));
+    if (!items.length) continue;
+    const h = document.createElement("div"); h.className = "grp"; h.textContent = g.label; L.append(h);
+    for (const o of items) {
+      const d = document.createElement("div"); d.className = "item";
+      const [c, gl] = ICON[o.value] || ["btc", "?"];
+      d.innerHTML = '<span class="ico ' + c + '">' + gl + '</span><b>' + o.value + '</b><em>' + g.label + '</em>';
+      d.onclick = () => { $(target).value = o.value; $(target).dispatchEvent(new Event("change")); closeSheet(); };
+      L.append(d);
+    }
+  }
+}
+function openSheet(t) { target = t; buildList(""); $("#q").value = ""; $("#sheet").classList.remove("hid"); setTimeout(() => $("#q").focus(), 60); }
+function closeSheet() { $("#sheet").classList.add("hid"); }
+$("#fp").onclick = () => openSheet("#f");
+$("#tp").onclick = () => openSheet("#t");
+$("#x").onclick = closeSheet;
+$("#q").oninput = e => buildList(e.target.value);
+$("#f").addEventListener("change", () => $("#fp").textContent = $("#f").value);
+$("#t").addEventListener("change", () => $("#tp").textContent = $("#t").value);
+$("#fp").textContent = $("#f").value; $("#tp").textContent = $("#t").value;
