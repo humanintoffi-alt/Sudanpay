@@ -110,21 +110,41 @@ for (const sel of ["#f", "#t"]) for (const o of $(sel).options) {
 paint("#f", "#fi"); paint("#t", "#ti");
 $("#a").addEventListener("input", () => $("#out").value = "");
 
+const NAMES = {BTC:"Bitcoin",ETH:"Ethereum",USDT:"Tether",USDC:"USD Coin",XMR:"Monero",
+TRX:"Tron",BNB:"BNB",SOL:"Solana",LTC:"Litecoin",DOGE:"Dogecoin",BCH:"Bitcoin Cash",
+DASH:"Dash",ZEC:"Zcash",XRP:"Ripple",ADA:"Cardano",XLM:"Stellar",SUI:"Sui",APT:"Aptos",
+ATOM:"Cosmos",ETC:"Ethereum Classic",VET:"VeChain",XTZ:"Tezos",S:"Sonic",ARB:"Arbitrum",
+POL:"Polygon",AVAX:"Avalanche",GRAM:"Gram",KCS:"KuCoin Token",DOT:"Polkadot",
+WETH:"Wrapped ETH",WBNB:"Wrapped BNB",WSOL:"Wrapped SOL",TUSD:"TrueUSD",USDS:"USD Sky",
+PAXG:"PAX Gold",XAUT:"Tether Gold",PEPE:"Pepe",LINK:"Chainlink",SHIB:"SHIB",
+AAVE:"Aave",CAKE:"PancakeSwap",TWT:"Trust Wallet",BTT:"BitTorrent"};
+const nm = v => { const k = Object.keys(NAMES).find(x => v.startsWith(x)); return k ? NAMES[k] : v; };
+const bd = v => { for (const [k, l] of [["C-CHAIN","AVAX"],["OPTIMISM","OP"],["ARBITRUM","ARB"],
+["POLYGON","POL"],["BASE","BASE"],["TRX","TRX"],["ETH","ETH"],["BSC","BSC"],["SOL","SOL"],
+["TON","TON"],["LN","LN"]]) if (v.endsWith(k)) return l; return ""; };
+const POP = ["BTC","BNBBSC","ETH","USDTETH","USDTTRX","XMR"];
 let target = "#f";
+
+function row(v, label) {
+  const d = document.createElement("div"); d.className = "item";
+  const [c, g] = ICON[v] || ["btc", "?"]; const bg = bd(v);
+  d.innerHTML = '<span class="ico ' + c + '">' + g + '</span><span class="nm">' + nm(v) +
+    '</span><b>' + v + '</b>' + (bg ? '<em class="bdg">' + bg + '</em>' : '');
+  d.onclick = () => { $(target).value = v; $(target).dispatchEvent(new Event("change")); closeSheet(); };
+  return d;
+}
 function buildList(f) {
   const L = $("#list"); L.innerHTML = ""; f = (f || "").trim().toLowerCase();
-  for (const g of $("#f").querySelectorAll("optgroup")) {
-    const items = [...g.children].filter(o =>
-      !f || o.value.toLowerCase().includes(f) || g.label.toLowerCase().includes(f));
-    if (!items.length) continue;
-    const h = document.createElement("div"); h.className = "grp"; h.textContent = g.label; L.append(h);
-    for (const o of items) {
-      const d = document.createElement("div"); d.className = "item";
-      const [c, gl] = ICON[o.value] || ["btc", "?"];
-      d.innerHTML = '<span class="ico ' + c + '">' + gl + '</span><b>' + o.value + '</b><em>' + g.label + '</em>';
-      d.onclick = () => { $(target).value = o.value; $(target).dispatchEvent(new Event("change")); closeSheet(); };
-      L.append(d);
-    }
+  if (!f) {
+    const h = document.createElement("div"); h.className = "grp"; h.textContent = "شائعة"; L.append(h);
+    POP.forEach(v => L.append(row(v)));
+    const h2 = document.createElement("div"); h2.className = "grp"; h2.textContent = "كل العملات"; L.append(h2);
+  }
+  for (const g of $("#f").querySelectorAll("optgroup")) for (const o of g.children) {
+    const v = o.value;
+    if (f && !(v.toLowerCase().includes(f) || nm(v).toLowerCase().includes(f) || g.label.toLowerCase().includes(f))) continue;
+    if (!f && POP.includes(v)) continue;
+    L.append(row(v));
   }
 }
 function openSheet(t) { target = t; buildList(""); $("#q").value = ""; $("#sheet").classList.remove("hid"); setTimeout(() => $("#q").focus(), 60); }
@@ -133,6 +153,6 @@ $("#fp").onclick = () => openSheet("#f");
 $("#tp").onclick = () => openSheet("#t");
 $("#x").onclick = closeSheet;
 $("#q").oninput = e => buildList(e.target.value);
-$("#f").addEventListener("change", () => $("#fp").textContent = $("#f").value);
-$("#t").addEventListener("change", () => $("#tp").textContent = $("#t").value);
-$("#fp").textContent = $("#f").value; $("#tp").textContent = $("#t").value;
+$("#f").addEventListener("change", () => { $("#fn").textContent = $("#f").value; });
+$("#t").addEventListener("change", () => { $("#tn").textContent = $("#t").value; });
+$("#fn").textContent = $("#f").value; $("#tn").textContent = $("#t").value;
