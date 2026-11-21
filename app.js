@@ -133,9 +133,19 @@ function row(v) {
   const d = document.createElement("div"); d.className = "item";
   const [c, g] = ICON[v] || ["btc", "?"];
   const n = NETN(v), bg = bd(v);
-  d.innerHTML = '<span class="ico ' + c + '">' + g + '</span><span class="nm">' + nm(v) +
-    (n ? ' <small>(' + n + ')</small>' : '') + '</span><span class="rt"><b>' + tick(v) + '</b>' +
-    (bg ? '<em class="bdg">' + bg + '</em>' : '') + '</span>';
+  const lg = document.createElement("span"); lg.className = "lg";
+  const fb = document.createElement("span"); fb.className = "ico " + c; fb.textContent = g;
+  lg.append(fb);
+  const img = new Image();
+  img.className = "logo"; img.alt = ""; img.loading = "lazy";
+  img.src = "https://ff.io/assets/images/coins/svg/" + tick(v).toLowerCase().replace(/[^a-z0-9]/g, "") + ".svg";
+  img.onload = () => fb.remove(); img.onerror = () => img.remove();
+  lg.append(img); d.append(lg);
+  const txt = document.createElement("span"); txt.className = "nm";
+  txt.innerHTML = nm(v) + (n ? ' <small>(' + n + ')</small>' : ''); d.append(txt);
+  const rt = document.createElement("span"); rt.className = "rt";
+  rt.innerHTML = '<b>' + tick(v) + '</b>' + (bg ? '<em class="bdg">' + bg + '</em>' : '');
+  d.append(rt);
   d.onclick = () => { $(target).value = v; $(target).dispatchEvent(new Event("change")); closeSheet(); };
   return d;
 }
