@@ -4,84 +4,179 @@
 <meta name="description" content="بدّل BTC وUSDT وETH وXMR فوراً بلا حساب. بدّل، لا تحتفظ.">
 <style>
 *{box-sizing:border-box;margin:0}
-:root{--red:#C1121F;--sand:#E9DFD0;--ink:#0A0708}
-body{background:var(--ink);color:var(--sand);font:16px/1.55 system-ui,sans-serif;overflow-x:hidden}
+:root{--red:#C1121F;--red2:#E23B2E;--gold:#FFB703;--sand:#F0E7D8;--ink:#08060A;--line:rgba(240,231,216,.14)}
+html,body{height:100%}
+body{background:var(--ink);color:var(--sand);font:16px/1.55 system-ui,"Segoe UI",sans-serif;overflow-x:hidden}
 .scene{position:fixed;inset:0;width:100%;height:100%;z-index:0}
-.veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 80% at 50% 100%,transparent 30%,rgba(10,7,8,.94) 100%)}
-main{position:relative;z-index:2;max-width:720px;margin:auto;padding:22px 18px 70px}
-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:28px}
-.brand{font-weight:800;font-size:20px}.brand b{color:var(--red)}
-.pill{border:1px solid rgba(233,223,208,.25);border-radius:99px;padding:5px 12px;font-size:12px}
-h1{font-size:clamp(30px,7vw,52px);line-height:1.05;letter-spacing:-.035em}h1 em{color:var(--red);font-style:normal}
-.lede{opacity:.7;max-width:44ch;margin-top:10px;font-size:15px}
-.card{margin-top:24px;background:rgba(10,7,8,.66);border:1px solid rgba(233,223,208,.14);border-radius:20px;padding:18px}
-.row{display:grid;grid-template-columns:1fr 46px 1fr;gap:9px;align-items:center}
-input,select{width:100%;background:rgba(233,223,208,.06);border:1px solid rgba(233,223,208,.18);color:var(--sand);border-radius:12px;padding:13px;font:inherit}
-.stack>*+*{margin-top:9px}
-.flip{background:none;border:1px solid rgba(233,223,208,.2);border-radius:50%;width:46px;height:46px;color:var(--sand);font-size:17px}
-.meta{margin-top:11px;font-size:13px;opacity:.65;min-height:19px}
-button.go{width:100%;margin-top:12px;background:var(--red);color:#fff;border:0;border-radius:12px;padding:15px;font:700 15px inherit}
-button.gh{background:none;border:1px solid rgba(233,223,208,.25);color:var(--sand);border-radius:12px;padding:12px;font:inherit;width:100%}
-.addr{font-family:monospace;font-size:12.5px;word-break:break-all;background:rgba(233,223,208,.07);padding:11px;border-radius:10px;margin:9px 0}
-.qr{display:block;margin:14px auto;background:#fff;padding:8px;border-radius:12px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
-.stat{border-top:1px solid rgba(233,223,208,.16);padding-top:9px;font-size:12.5px;opacity:.68}
-.stat b{display:block;font-size:19px;opacity:1}
-.foot{margin-top:40px;font-size:11.5px;opacity:.42;line-height:1.8}
-.foot a{color:var(--red)}
+.layer{will-change:transform}
+.veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(130% 85% at 50% 105%,transparent 34%,rgba(8,6,10,.93) 100%)}
+main{position:relative;z-index:2;max-width:560px;margin:auto;padding:20px 16px 60px}
+header{display:flex;justify-content:space-between;align-items:center;padding-bottom:26px}
+.brand{font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:7px}
+.brand b{color:var(--red2)}
+.dot{width:7px;height:7px;border-radius:50%;background:#2fd07a;box-shadow:0 0 10px #2fd07a;animation:pulse 2.2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.pill{border:1px solid var(--line);border-radius:99px;padding:5px 11px;font-size:11px;opacity:.75}
+h1{font-size:clamp(28px,7.4vw,46px);line-height:1.06;letter-spacing:-.035em;font-weight:800}
+h1 em{color:var(--red2);font-style:normal}
+.lede{opacity:.68;font-size:14px;margin-top:9px}
+.card{margin-top:22px;background:rgba(12,9,14,.72);backdrop-filter:blur(22px) saturate(140%);
+border:1px solid var(--line);border-radius:26px;padding:8px;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.leg{display:flex;justify-content:space-between;font-size:11.5px;opacity:.5;padding:12px 14px 6px}
+.row{display:flex;align-items:center;gap:8px;background:rgba(240,231,216,.05);border-radius:18px;padding:9px 10px}
+.row select{background:none;border:0;color:var(--sand);font:700 15px inherit;padding:8px 2px;appearance:none;cursor:pointer}
+.row select option{background:#121016}
+.row input{flex:1;min-width:0;background:none;border:0;color:var(--sand);font:700 21px inherit;text-align:left;padding:8px 4px}
+.row input:focus{outline:0}
+.ico{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:800 12px/1 system-ui;color:#fff;flex:0 0 auto}
+.btc{background:#F7931A}.usdt{background:#26A17B}.eth{background:#627EEA}.xmr{background:#FF6600}.trx{background:#E50914}
+.mid{display:flex;justify-content:center;margin:-13px 0;position:relative;z-index:3}
+.flip{width:42px;height:42px;border-radius:50%;background:#17131b;border:1px solid var(--line);color:var(--sand);font-size:16px;cursor:pointer;transition:.25s}
+.flip:active{transform:rotate(180deg)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 6px 0;background:rgba(240,231,216,.05);padding:5px;border-radius:14px}
+.seg button{background:none;border:0;color:var(--sand);font:600 12.5px inherit;padding:10px;border-radius:10px;cursor:pointer;opacity:.55}
+.seg button.on{background:rgba(193,18,31,.22);color:#fff;opacity:1;box-shadow:inset 0 0 0 1px rgba(226,59,46,.5)}
+.fields{margin:12px 6px 0;display:grid;gap:8px}
+.fields input{background:rgba(240,231,216,.05);border:1px solid transparent;border-radius:13px;padding:13px;color:var(--sand);font:inherit;font-size:13.5px}
+.fields input:focus{outline:0;border-color:rgba(226,59,46,.55)}
+.meta{margin:11px 10px 0;font-size:12.5px;opacity:.62;min-height:34px;line-height:1.5}
+button.go{width:100%;margin:4px 0 4px;background:linear-gradient(180deg,var(--red2),var(--red));color:#fff;border:0;
+border-radius:18px;padding:17px;font:800 15.5px inherit;cursor:pointer;box-shadow:0 10px 26px rgba(193,18,31,.35)}
+button.go:disabled{opacity:.42;box-shadow:none;cursor:default}
+.gh{background:rgba(240,231,216,.06);border:1px solid var(--line);color:var(--sand);border-radius:14px;padding:13px;font:600 13px inherit;width:100%;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}
+.stat{background:rgba(12,9,14,.5);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center}
+.stat b{display:block;font-size:16px;margin-bottom:2px}.stat span{font-size:10.5px;opacity:.55}
+.addr{font-family:monospace;font-size:12px;word-break:break-all;background:rgba(240,231,216,.07);padding:12px;border-radius:12px;margin:10px 0;text-align:center}
+.qr{display:block;margin:12px auto;background:#fff;padding:9px;border-radius:14px}
+.foot{margin-top:34px;font-size:11px;opacity:.4;line-height:1.9;text-align:center}
+.foot a{color:var(--red2)}
+@media(prefers-reduced-motion:reduce){.scene *{animation:none!important}}
 </style></head><body>
-<svg class="scene" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+<svg class="scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
 <defs>
-<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140a11"/><stop offset=".42" stop-color="#3c0f1b"/><stop offset=".7" stop-color="#8d1b2a"/><stop offset="1" stop-color="#c1121f"/></linearGradient>
-<linearGradient id="riv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12586a"/><stop offset="1" stop-color="#03121a"/></linearGradient>
-<radialGradient id="sun"><stop offset="0" stop-color="#ffb703" stop-opacity=".6"/><stop offset="1" stop-color="#ffb703" stop-opacity="0"/></radialGradient>
-<filter id="wv"><feTurbulence type="fractalNoise" baseFrequency="0.011 0.019" numOctaves="2" seed="4"><animate attributeName="baseFrequency" dur="9s" repeatCount="indefinite" values="0.011 0.019;0.019 0.028;0.011 0.019"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="13" xChannelSelector="R" yChannelSelector="G"/></filter>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#0a0a1f"/><stop offset=".3" stop-color="#2a1030"/>
+<stop offset=".52" stop-color="#6e1630"/><stop offset=".68" stop-color="#c1121f"/>
+<stop offset=".82" stop-color="#ff7a1a"/><stop offset=".92" stop-color="#ffb703"/></linearGradient>
+<linearGradient id="riv" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#3a2a3f"/><stop offset=".25" stop-color="#153c4a"/><stop offset="1" stop-color="#050d14"/></linearGradient>
+<radialGradient id="sun"><stop offset="0" stop-color="#fff3c4"/><stop offset=".45" stop-color="#ffb703" stop-opacity=".85"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></radialGradient>
+<linearGradient id="refl" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#ffcf5c" stop-opacity=".55"/><stop offset="1" stop-color="#ffcf5c" stop-opacity="0"/></linearGradient>
+<filter id="wv"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="4">
+<animate attributeName="baseFrequency" dur="8s" repeatCount="indefinite" values="0.012 0.02;0.02 0.03;0.012 0.02"/></feTurbulence>
+<feDisplacementMap in="SourceGraphic" scale="12" xChannelSelector="R" yChannelSelector="G"/></filter>
+<filter id="soft"><feGaussianBlur stdDeviation="9"/></filter>
 </defs>
-<rect width="1440" height="800" fill="url(#sky)"/>
-<circle cx="1030" cy="440" r="280" fill="url(#sun)"/>
-<g data-d="0.06" fill="#2a0b14" opacity=".85"><path d="M0 470h90v-40h40v40h60v-70h50v70h70v-30h40v30h60v-55h45v55h70v-25h50v25h60v-60h40v60h80v-35h45v35h70v-50h50v50h75v-30h45v30h60v-45h50v45h80v-20h60v20h70v-40h50v40H0z"/></g>
-<g data-d="0.12" fill="#140609"><path d="M690 500l10-160q4-46 20-70 16 24 20 70l10 160z"/><ellipse cx="720" cy="270" rx="26" ry="7"/><path d="M0 520h120v-52h34v52h54v-88h40v88h64v-40h36v40h58v-70h44v70h70v-32h48v32h70v-62h42v62h84v-44h46v44h66v-58h44v58h72v-30h50v30h74v-50h46v50h62v-34h46v34h80v-46h48v46H0z"/></g>
-<g data-d="0.2" fill="#0b0305"><path d="M120 560v-70q0-8 8-8t8 8v70z"/><path d="M128 486q-26-10-38-30 22 4 38 22 16-18 38-22-12 20-38 30z"/><path d="M1330 560v-80q0-8 8-8t8 8v80z"/><path d="M1338 476q-28-11-40-32 24 4 40 24 16-20 40-24-12 21-40 32z"/></g>
-<rect y="560" width="1440" height="240" fill="url(#riv)"/>
-<g stroke="#7fd7e8" stroke-opacity=".35" fill="none" stroke-width="2"><path d="M-100 610h240" stroke-dasharray="60 220"><animate attributeName="stroke-dashoffset" dur="6s" values="0;-280" repeatCount="indefinite"/></path><path d="M300 645h260" stroke-dasharray="40 260"><animate attributeName="stroke-dashoffset" dur="8s" values="0;-300" repeatCount="indefinite"/></path><path d="M900 625h300" stroke-dasharray="70 240"><animate attributeName="stroke-dashoffset" dur="7s" values="0;-310" repeatCount="indefinite"/></path><path d="M1180 670h240" stroke-dasharray="50 200"><animate attributeName="stroke-dashoffset" dur="9s" values="0;-250" repeatCount="indefinite"/></path></g>
-<g fill="#0b0305"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="4s" repeatCount="indefinite"/><path d="M420 640h54l-8 14h-38z"/><path d="M447 640v-34h2v34z"/><path d="M448 606l22 30h-22z"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="5.5s" repeatCount="indefinite"/><path d="M980 690h44l-6 12h-32z"/><path d="M1002 690v-26h2v26z"/><path d="M1003 664l18 24h-18z"/></g></g>
-<rect y="724" width="1440" height="76" fill="#080405"/>
-<g fill="#e9dfd0" opacity=".55"><g><animateTransform attributeName="transform" type="translate" values="-140 0;1580 0" dur="16s" repeatCount="indefinite"/><path d="M0 760h70l10 10h-90z"/><rect x="8" y="748" width="34" height="12" rx="3"/><circle cx="16" cy="772" r="5" fill="#080405"/><circle cx="56" cy="772" r="5" fill="#080405"/></g><g><animateTransform attributeName="transform" type="translate" values="1580 0;-140 0" dur="22s" repeatCount="indefinite"/><path d="M0 758h58l8 9h-74z"/><rect x="6" y="746" width="26" height="12" rx="3"/><circle cx="13" cy="769" r="4" fill="#080405"/><circle cx="45" cy="769" r="4" fill="#080405"/></g></g>
-<g filter="url(#wv)" transform="translate(1210 300)"><rect width="150" height="96" fill="#d21034"/><rect y="32" width="150" height="32" fill="#fff"/><rect y="64" width="150" height="32" fill="#0a0708"/><path d="M0 0l62 48-62 48z" fill="#007229"/></g>
-<rect x="1204" y="300" width="6" height="300" fill="#2b2b2b"/>
+<rect width="1440" height="900" fill="url(#sky)"/>
+<g class="layer" data-d="0.04"><circle cx="700" cy="560" r="240" fill="url(#sun)"/></g>
+<g class="layer" data-d="0.02" opacity=".22" stroke="#ffd27a" stroke-width="2">
+<path d="M700 320V0"/><path d="M700 320L380 0"/><path d="M700 320L1020 0"/>
+<path d="M700 320L120 60"/><path d="M700 320L1280 60"/>
+<animateTransform attributeName="transform" type="rotate" values="-2 700 560;2 700 560;-2 700 560" dur="14s" repeatCount="indefinite"/></g>
+<g class="layer" data-d="0.05" fill="#4a1030" opacity=".55" filter="url(#soft)">
+<path d="M0 600q120-60 240-20t220-40 240 30 220-35 260 40 260-25v120H0z"/></g>
+<g class="layer" data-d="0.1" fill="#250a1c">
+<path d="M690 620l9-150q4-44 21-66 17 22 21 66l9 150z"/><ellipse cx="720" cy="392" rx="24" ry="6"/>
+<path d="M0 640h100v-48h30v48h52v-80h36v80h60v-38h34v38h56v-64h42v64h66v-30h46v30h68v-56h40v56h80v-40h44v40h64v-52h42v52h70v-28h48v28h72v-46h44v46h60v-32h44v32h76v-42h46v42H0z"/>
+</g>
+<g class="layer" data-d="0.16" fill="#160610">
+<path d="M110 690v-62q0-7 7-7t7 7v62z"/><path d="M117 622q-24-9-35-28 20 4 35 20 15-16 35-20-11 19-35 28z"/>
+<path d="M1322 690v-70q0-7 7-7t7 7v70z"/><path d="M1329 614q-26-10-38-30 22 4 38 22 16-18 38-22-12 20-38 30z"/>
+</g>
+<rect y="660" width="1440" height="240" fill="url(#riv)"/>
+<path d="M640 660h120l40 240H600z" fill="url(#refl)" opacity=".5"/>
+<g stroke="#ffe0a3" stroke-opacity=".4" fill="none" stroke-width="2" stroke-linecap="round">
+<path d="M-120 700h260" stroke-dasharray="60 240"><animate attributeName="stroke-dashoffset" dur="5s" values="0;-300" repeatCount="indefinite"/></path>
+<path d="M340 740h300" stroke-dasharray="45 270"><animate attributeName="stroke-dashoffset" dur="7s" values="0;-315" repeatCount="indefinite"/></path>
+<path d="M880 716h320" stroke-dasharray="70 250"><animate attributeName="stroke-dashoffset" dur="6s" values="0;-320" repeatCount="indefinite"/></path>
+<path d="M1200 772h280" stroke-dasharray="55 210"><animate attributeName="stroke-dashoffset" dur="8s" values="0;-265" repeatCount="indefinite"/></path>
+<path d="M180 800h260" stroke-dasharray="40 200"><animate attributeName="stroke-dashoffset" dur="9s" values="0;-240" repeatCount="indefinite"/></path>
+</g>
+<g fill="#0b0308" opacity=".92">
+<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="4.5s" repeatCount="indefinite"/>
+<path d="M400 736h58l-9 15h-40z"/><path d="M429 736v-36h2v36z"/><path d="M430 700l23 32h-23z"/></g>
+<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="6s" repeatCount="indefinite"/>
+<path d="M1000 780h46l-7 13h-32z"/><path d="M1023 780v-27h2v27z"/><path d="M1024 753l19 25h-19z"/></g>
+</g>
+<g fill="#1a0714" opacity=".8">
+<g><animateTransform attributeName="transform" type="translate" values="-200 0;1700 0" dur="26s" repeatCount="indefinite"/>
+<path d="M0 250q12-8 24 0-12-3-24 0z"/><path d="M40 220q10-7 20 0-10-3-20 0z"/><path d="M70 262q11-7 22 0-11-3-22 0z"/></g>
+<g><animateTransform attributeName="transform" type="translate" values="1700 0;-200 0" dur="34s" repeatCount="indefinite"/>
+<path d="M0 150q11-8 22 0-11-3-22 0z"/><path d="M34 180q9-6 18 0-9-3-18 0z"/></g>
+</g>
+<rect y="838" width="1440" height="62" fill="#060406"/>
+<g fill="#f0e7d8" opacity=".5">
+<g><animateTransform attributeName="transform" type="translate" values="-160 0;1600 0" dur="15s" repeatCount="indefinite"/>
+<path d="M0 872h74l10 10h-94z"/><rect x="8" y="860" width="36" height="12" rx="3"/>
+<circle cx="17" cy="884" r="5" fill="#060406"/><circle cx="59" cy="884" r="5" fill="#060406"/></g>
+<g><animateTransform attributeName="transform" type="translate" values="1600 0;-160 0" dur="21s" repeatCount="indefinite"/>
+<path d="M0 870h60l8 9h-76z"/><rect x="6" y="858" width="27" height="12" rx="3"/>
+<circle cx="14" cy="881" r="4" fill="#060406"/><circle cx="46" cy="881" r="4" fill="#060406"/></g>
+</g>
+<g fill="#ffcf7a" opacity=".55">
+<circle cx="120" cy="820" r="2"><animate attributeName="cy" values="860;700" dur="9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.7;0" dur="9s" repeatCount="indefinite"/></circle>
+<circle cx="330" cy="800" r="1.6"><animate attributeName="cy" values="850;680" dur="12s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.6;0" dur="12s" repeatCount="indefinite"/></circle>
+<circle cx="560" cy="830" r="2.2"><animate attributeName="cy" values="870;690" dur="10s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.7;0" dur="10s" repeatCount="indefinite"/></circle>
+<circle cx="880" cy="810" r="1.7"><animate attributeName="cy" values="860;700" dur="13s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.55;0" dur="13s" repeatCount="indefinite"/></circle>
+<circle cx="1120" cy="840" r="2"><animate attributeName="cy" values="880;710" dur="11s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.6;0" dur="11s" repeatCount="indefinite"/></circle>
+<circle cx="1310" cy="820" r="1.5"><animate attributeName="cy" values="855;695" dur="14s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.5;0" dur="14s" repeatCount="indefinite"/></circle>
+</g>
+<g filter="url(#wv)" transform="translate(1180 250)"><rect width="168" height="108" fill="#d21034"/>
+<rect y="36" width="168" height="36" fill="#fff"/><rect y="72" width="168" height="36" fill="#0a0708"/>
+<path d="M0 0l70 54-70 54z" fill="#007229"/></g>
+<rect x="1174" y="250" width="6" height="330" fill="#2b2b2b"/>
 </svg>
 <div class="veil"></div>
 <main>
-<header><div class="brand">Sudan<b>Pay</b> 🇸🇩</div><span class="pill">بدّل · لا تحتفظ · بلا KYC</span></header>
+<header>
+<div class="brand">Sudan<b>Pay</b> 🇸🇩</div>
+<span class="pill"><span class="dot" style="display:inline-block;vertical-align:middle"></span> يعمل</span>
+</header>
+
 <section id="swap">
-<h1>بدّل عملاتك<br>بسرعة <em>النيل</em>.</h1>
-<p class="lede">سعر مقفول، استرداد مضمون، بلا حساب.</p>
-<div class="card stack">
+<h1>بدّل بسرعة<br><em>النيل</em>. بلا حساب.</h1>
+<p class="lede">سعر مقفول عشر دقائق، واسترداد إلى عنوانك إن تعذّر التنفيذ.</p>
+
+<div class="card">
+<div class="leg"><span>ترسل</span><span id="lim"></span></div>
 <div class="row">
-<select id="f"><option>BTC</option><option selected>USDTTRC</option><option>ETH</option><option>XMR</option><option>TRX</option></select>
-<button class="flip" id="flip">⇄</button>
-<select id="t"><option>USDTTRC</option><option selected>BTC</option><option>XMR</option><option>ETH</option><option>TRX</option></select>
+<span class="ico btc" id="fi">₿</span>
+<select id="f"><option value="BTC">BTC</option><option value="USDTTRC" selected>USDT</option><option value="ETH">ETH</option><option value="XMR">XMR</option><option value="TRX">TRX</option></select>
+<input id="a" inputmode="decimal" placeholder="0.00">
 </div>
-<select id="type"><option value="fixed">سعر مقفول · 1%</option><option value="float">سعر عائم · 0.5%</option></select>
-<input id="a" inputmode="decimal" placeholder="المبلغ المُرسَل">
+<div class="mid"><button class="flip" id="flip" aria-label="عكس">⇅</button></div>
+<div class="row">
+<span class="ico btc" id="ti">₿</span>
+<select id="t"><option value="USDTTRC">USDT</option><option value="BTC" selected>BTC</option><option value="XMR">XMR</option><option value="ETH">ETH</option><option value="TRX">TRX</option></select>
+<input id="out" readonly placeholder="0.00" tabindex="-1">
+</div>
+<div class="seg"><button class="on" data-v="fixed">سعر مقفول · 1%</button><button data-v="float">سعر عائم · 0.5%</button></div>
+<input type="hidden" id="type" value="fixed">
+<div class="fields">
 <input id="addr" placeholder="عنوان الاستلام">
 <input id="refund" placeholder="عنوان الاسترداد — إجباري">
-<div class="meta" id="m">أدخل مبلغاً لعرض السعر</div>
-<button class="go" id="go" disabled>إنشاء الطلب</button>
 </div>
-<div class="stats"><div class="stat"><b>1%</b>سعر ثابت</div><div class="stat"><b>10 د</b>قفل السعر</div><div class="stat"><b>2018</b>المشغّل منذ</div></div>
+<div class="meta" id="m">أدخل مبلغاً لعرض السعر</div>
+<button class="go" id="go" disabled>ابدأ التبديل</button>
+</div>
+
+<div class="stats"><div class="stat"><b>0.4%</b><span>عمولتنا</span></div><div class="stat"><b>10 د</b><span>قفل السعر</span></div><div class="stat"><b>2018</b><span>المشغّل منذ</span></div></div>
 </section>
+
 <section id="view" hidden>
 <h1>أرسل الآن.</h1>
 <p class="lede" id="sum"></p>
-<div class="card stack">
-<img class="qr" id="qr" width="180" height="180" alt="QR">
+<div class="card">
+<img class="qr" id="qr" width="176" height="176" alt="QR">
 <div class="addr" id="dep"></div>
-<div class="meta">الحالة: <b id="st">بانتظار الإيداع</b> · المتبقي <b id="clock"></b></div>
-<div id="em" hidden class="stack"><div class="meta">المبلغ غير مطابق أو وصل متأخراً. اختر:</div><button class="gh" id="keep">متابعة بسعر السوق</button><button class="gh" id="back">استرداد إلى عنواني</button></div>
+<div class="meta" style="text-align:center">الحالة: <b id="st">بانتظار الإيداع</b> · <b id="clock"></b></div>
+<div id="em" hidden class="fields"><div class="meta">المبلغ غير مطابق أو وصل متأخراً:</div><button class="gh" id="keep">متابعة بسعر السوق</button><button class="gh" id="back">استرداد إلى عنواني</button></div>
 <button class="gh" id="new">طلب جديد</button>
 </div>
 </section>
-<p class="foot">SudanPay واجهة مستقلة. التنفيذ والاسترداد عبر <a href="https://ff.io" rel="noopener">FixedFloat</a>. لا حفظ أرصدة.<br>🇸🇩 صُنع للسودان</p>
+
+<p class="foot">SudanPay واجهة مستقلة · التنفيذ والاسترداد عبر <a href="https://ff.io" rel="noopener">FixedFloat</a><br>🇸🇩 صُنع للسودان</p>
 </main>
 <script src="app.js"></script></body></html>

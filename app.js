@@ -82,3 +82,20 @@ $("#new").onclick = () => { $("#view").hidden = true; $("#swap").hidden = false;
 
 const last = localStorage.getItem("last");
 if (last) { try { show(JSON.parse(last)); } catch (e) {} }
+
+const ICON = { BTC:["btc","₿"], USDTTRC:["usdt","₮"], ETH:["eth","Ξ"], XMR:["xmr","ɱ"], TRX:["trx","⟁"] };
+function paint(sel, ic) {
+  const v = $(sel).value, [c, g] = ICON[v] || ["btc", "?"];
+  $(ic).className = "ico " + c; $(ic).textContent = g;
+}
+paint("#f", "#fi"); paint("#t", "#ti");
+$("#f").addEventListener("change", () => paint("#f", "#fi"));
+$("#t").addEventListener("change", () => paint("#t", "#ti"));
+document.querySelectorAll(".seg button").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".seg button").forEach(x => x.classList.remove("on"));
+  b.classList.add("on"); $("#type").value = b.dataset.v; q();
+});
+addEventListener("pointermove", e => {
+  const x = (e.clientX / innerWidth - .5) * 2;
+  document.querySelectorAll("[data-d]").forEach(n => n.style.transform = "translateX(" + (-x * 46 * +n.dataset.d) + "px)");
+}, { passive: true });
