@@ -156,3 +156,16 @@ $("#q").oninput = e => buildList(e.target.value);
 $("#f").addEventListener("change", () => { $("#fn").textContent = $("#f").value; });
 $("#t").addEventListener("change", () => { $("#tn").textContent = $("#t").value; });
 $("#fn").textContent = $("#f").value; $("#tn").textContent = $("#t").value;
+
+addEventListener("error", e => {
+  const b = document.createElement("div");
+  b.style.cssText = "position:fixed;bottom:0;left:0;right:0;z-index:99;background:#C1121F;color:#fff;font:11px monospace;padding:8px;white-space:pre-wrap";
+  b.textContent = "ERR: " + e.message + " @" + e.lineno;
+  document.body.append(b);
+});
+document.addEventListener("click", ev => {
+  const t = ev.target.closest("#fp,#tp,#x");
+  if (!t) return;
+  if (t.id === "x") return closeSheet();
+  openSheet(t.id === "fp" ? "#f" : "#t");
+});

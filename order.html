@@ -24,6 +24,9 @@ border:1px solid var(--line);border-radius:24px;padding:18px}
 .addr button{background:rgba(193,18,31,.22);border:1px solid rgba(226,59,46,.5);color:#fff;
 border-radius:10px;padding:8px 11px;font:600 11.5px inherit;cursor:pointer;flex:0 0 auto}
 .qr{display:block;margin:16px auto 0;background:#fff;padding:9px;border-radius:14px}
+.netline{display:flex;justify-content:space-between;align-items:center;margin-top:12px;
+background:rgba(226,59,46,.1);border:1px solid rgba(226,59,46,.35);border-radius:12px;padding:10px 13px;font-size:12px}
+.netline b{color:#FFB3A0;font-weight:800;letter-spacing:.02em}
 .clock{text-align:center;margin-top:14px;font-size:12px;opacity:.6}
 </style></head><body>
 <video class="scene" autoplay muted loop playsinline
@@ -39,6 +42,7 @@ border-radius:10px;padding:8px 11px;font:600 11.5px inherit;cursor:pointer;flex:
 
 <div class="card">
 <div class="amt">أرسل بالضبط<b id="am"></b></div>
+<div class="netline"><span>الشبكة</span><b id="net">—</b></div>
 <div class="addr"><span id="dep">—</span><button id="cp">نسخ</button></div>
 <img class="qr" id="qr" width="168" height="168" alt="QR">
 <div class="clock" id="clk"></div>
@@ -87,6 +91,11 @@ if (!o || o.id !== id) {
 $("#oid").textContent = id.slice(0, 8).toUpperCase();
 $("#am").textContent = o.amount + " " + o.frm.toUpperCase();
 $("#dep").textContent = o.deposit;
+const NETN = v => { for (const [k, l] of [["C-CHAIN","Avalanche"],["OPTIMISM","Optimism"],
+["ARBITRUM","Arbitrum"],["POLYGON","Polygon"],["BASE","Base"],["TRX","Tron · TRC20"],
+["ETH","Ethereum · ERC20"],["BSC","BNB Chain · BEP20"],["SOL","Solana"],["TON","TON"],["LN","Lightning"]])
+if (v.endsWith(k)) return l; return v === "BTC" ? "Bitcoin" : v; };
+$("#net").textContent = NETN(o.frm);
 $("#qr").src = "https://api.qrserver.com/v1/create-qr-code/?size=168x168&data=" + encodeURIComponent(o.deposit);
 $("#cp").onclick = async () => {
   try { await navigator.clipboard.writeText(o.deposit); $("#cp").textContent = "تم"; } catch (e) {}
