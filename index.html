@@ -1,0 +1,87 @@
+<!doctype html><html lang="ar" dir="rtl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SudanPay — تبديل عملات فوري 🇸🇩</title>
+<meta name="description" content="بدّل BTC وUSDT وETH وXMR فوراً بلا حساب. بدّل، لا تحتفظ.">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--red:#C1121F;--sand:#E9DFD0;--ink:#0A0708}
+body{background:var(--ink);color:var(--sand);font:16px/1.55 system-ui,sans-serif;overflow-x:hidden}
+.scene{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 80% at 50% 100%,transparent 30%,rgba(10,7,8,.94) 100%)}
+main{position:relative;z-index:2;max-width:720px;margin:auto;padding:22px 18px 70px}
+header{display:flex;justify-content:space-between;align-items:center;padding-bottom:28px}
+.brand{font-weight:800;font-size:20px}.brand b{color:var(--red)}
+.pill{border:1px solid rgba(233,223,208,.25);border-radius:99px;padding:5px 12px;font-size:12px}
+h1{font-size:clamp(30px,7vw,52px);line-height:1.05;letter-spacing:-.035em}h1 em{color:var(--red);font-style:normal}
+.lede{opacity:.7;max-width:44ch;margin-top:10px;font-size:15px}
+.card{margin-top:24px;background:rgba(10,7,8,.66);border:1px solid rgba(233,223,208,.14);border-radius:20px;padding:18px}
+.row{display:grid;grid-template-columns:1fr 46px 1fr;gap:9px;align-items:center}
+input,select{width:100%;background:rgba(233,223,208,.06);border:1px solid rgba(233,223,208,.18);color:var(--sand);border-radius:12px;padding:13px;font:inherit}
+.stack>*+*{margin-top:9px}
+.flip{background:none;border:1px solid rgba(233,223,208,.2);border-radius:50%;width:46px;height:46px;color:var(--sand);font-size:17px}
+.meta{margin-top:11px;font-size:13px;opacity:.65;min-height:19px}
+button.go{width:100%;margin-top:12px;background:var(--red);color:#fff;border:0;border-radius:12px;padding:15px;font:700 15px inherit}
+button.gh{background:none;border:1px solid rgba(233,223,208,.25);color:var(--sand);border-radius:12px;padding:12px;font:inherit;width:100%}
+.addr{font-family:monospace;font-size:12.5px;word-break:break-all;background:rgba(233,223,208,.07);padding:11px;border-radius:10px;margin:9px 0}
+.qr{display:block;margin:14px auto;background:#fff;padding:8px;border-radius:12px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.stat{border-top:1px solid rgba(233,223,208,.16);padding-top:9px;font-size:12.5px;opacity:.68}
+.stat b{display:block;font-size:19px;opacity:1}
+.foot{margin-top:40px;font-size:11.5px;opacity:.42;line-height:1.8}
+.foot a{color:var(--red)}
+</style></head><body>
+<svg class="scene" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140a11"/><stop offset=".42" stop-color="#3c0f1b"/><stop offset=".7" stop-color="#8d1b2a"/><stop offset="1" stop-color="#c1121f"/></linearGradient>
+<linearGradient id="riv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12586a"/><stop offset="1" stop-color="#03121a"/></linearGradient>
+<radialGradient id="sun"><stop offset="0" stop-color="#ffb703" stop-opacity=".6"/><stop offset="1" stop-color="#ffb703" stop-opacity="0"/></radialGradient>
+<filter id="wv"><feTurbulence type="fractalNoise" baseFrequency="0.011 0.019" numOctaves="2" seed="4"><animate attributeName="baseFrequency" dur="9s" repeatCount="indefinite" values="0.011 0.019;0.019 0.028;0.011 0.019"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="13" xChannelSelector="R" yChannelSelector="G"/></filter>
+</defs>
+<rect width="1440" height="800" fill="url(#sky)"/>
+<circle cx="1030" cy="440" r="280" fill="url(#sun)"/>
+<g data-d="0.06" fill="#2a0b14" opacity=".85"><path d="M0 470h90v-40h40v40h60v-70h50v70h70v-30h40v30h60v-55h45v55h70v-25h50v25h60v-60h40v60h80v-35h45v35h70v-50h50v50h75v-30h45v30h60v-45h50v45h80v-20h60v20h70v-40h50v40H0z"/></g>
+<g data-d="0.12" fill="#140609"><path d="M690 500l10-160q4-46 20-70 16 24 20 70l10 160z"/><ellipse cx="720" cy="270" rx="26" ry="7"/><path d="M0 520h120v-52h34v52h54v-88h40v88h64v-40h36v40h58v-70h44v70h70v-32h48v32h70v-62h42v62h84v-44h46v44h66v-58h44v58h72v-30h50v30h74v-50h46v50h62v-34h46v34h80v-46h48v46H0z"/></g>
+<g data-d="0.2" fill="#0b0305"><path d="M120 560v-70q0-8 8-8t8 8v70z"/><path d="M128 486q-26-10-38-30 22 4 38 22 16-18 38-22-12 20-38 30z"/><path d="M1330 560v-80q0-8 8-8t8 8v80z"/><path d="M1338 476q-28-11-40-32 24 4 40 24 16-20 40-24-12 21-40 32z"/></g>
+<rect y="560" width="1440" height="240" fill="url(#riv)"/>
+<g stroke="#7fd7e8" stroke-opacity=".35" fill="none" stroke-width="2"><path d="M-100 610h240" stroke-dasharray="60 220"><animate attributeName="stroke-dashoffset" dur="6s" values="0;-280" repeatCount="indefinite"/></path><path d="M300 645h260" stroke-dasharray="40 260"><animate attributeName="stroke-dashoffset" dur="8s" values="0;-300" repeatCount="indefinite"/></path><path d="M900 625h300" stroke-dasharray="70 240"><animate attributeName="stroke-dashoffset" dur="7s" values="0;-310" repeatCount="indefinite"/></path><path d="M1180 670h240" stroke-dasharray="50 200"><animate attributeName="stroke-dashoffset" dur="9s" values="0;-250" repeatCount="indefinite"/></path></g>
+<g fill="#0b0305"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="4s" repeatCount="indefinite"/><path d="M420 640h54l-8 14h-38z"/><path d="M447 640v-34h2v34z"/><path d="M448 606l22 30h-22z"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="5.5s" repeatCount="indefinite"/><path d="M980 690h44l-6 12h-32z"/><path d="M1002 690v-26h2v26z"/><path d="M1003 664l18 24h-18z"/></g></g>
+<rect y="724" width="1440" height="76" fill="#080405"/>
+<g fill="#e9dfd0" opacity=".55"><g><animateTransform attributeName="transform" type="translate" values="-140 0;1580 0" dur="16s" repeatCount="indefinite"/><path d="M0 760h70l10 10h-90z"/><rect x="8" y="748" width="34" height="12" rx="3"/><circle cx="16" cy="772" r="5" fill="#080405"/><circle cx="56" cy="772" r="5" fill="#080405"/></g><g><animateTransform attributeName="transform" type="translate" values="1580 0;-140 0" dur="22s" repeatCount="indefinite"/><path d="M0 758h58l8 9h-74z"/><rect x="6" y="746" width="26" height="12" rx="3"/><circle cx="13" cy="769" r="4" fill="#080405"/><circle cx="45" cy="769" r="4" fill="#080405"/></g></g>
+<g filter="url(#wv)" transform="translate(1210 300)"><rect width="150" height="96" fill="#d21034"/><rect y="32" width="150" height="32" fill="#fff"/><rect y="64" width="150" height="32" fill="#0a0708"/><path d="M0 0l62 48-62 48z" fill="#007229"/></g>
+<rect x="1204" y="300" width="6" height="300" fill="#2b2b2b"/>
+</svg>
+<div class="veil"></div>
+<main>
+<header><div class="brand">Sudan<b>Pay</b> 🇸🇩</div><span class="pill">بدّل · لا تحتفظ · بلا KYC</span></header>
+<section id="swap">
+<h1>بدّل عملاتك<br>بسرعة <em>النيل</em>.</h1>
+<p class="lede">سعر مقفول، استرداد مضمون، بلا حساب.</p>
+<div class="card stack">
+<div class="row">
+<select id="f"><option>BTC</option><option selected>USDTTRC</option><option>ETH</option><option>XMR</option><option>TRX</option></select>
+<button class="flip" id="flip">⇄</button>
+<select id="t"><option>USDTTRC</option><option selected>BTC</option><option>XMR</option><option>ETH</option><option>TRX</option></select>
+</div>
+<select id="type"><option value="fixed">سعر مقفول · 1%</option><option value="float">سعر عائم · 0.5%</option></select>
+<input id="a" inputmode="decimal" placeholder="المبلغ المُرسَل">
+<input id="addr" placeholder="عنوان الاستلام">
+<input id="refund" placeholder="عنوان الاسترداد — إجباري">
+<div class="meta" id="m">أدخل مبلغاً لعرض السعر</div>
+<button class="go" id="go" disabled>إنشاء الطلب</button>
+</div>
+<div class="stats"><div class="stat"><b>1%</b>سعر ثابت</div><div class="stat"><b>10 د</b>قفل السعر</div><div class="stat"><b>2018</b>المشغّل منذ</div></div>
+</section>
+<section id="view" hidden>
+<h1>أرسل الآن.</h1>
+<p class="lede" id="sum"></p>
+<div class="card stack">
+<img class="qr" id="qr" width="180" height="180" alt="QR">
+<div class="addr" id="dep"></div>
+<div class="meta">الحالة: <b id="st">بانتظار الإيداع</b> · المتبقي <b id="clock"></b></div>
+<div id="em" hidden class="stack"><div class="meta">المبلغ غير مطابق أو وصل متأخراً. اختر:</div><button class="gh" id="keep">متابعة بسعر السوق</button><button class="gh" id="back">استرداد إلى عنواني</button></div>
+<button class="gh" id="new">طلب جديد</button>
+</div>
+</section>
+<p class="foot">SudanPay واجهة مستقلة. التنفيذ والاسترداد عبر <a href="https://ff.io" rel="noopener">FixedFloat</a>. لا حفظ أرصدة.<br>🇸🇩 صُنع للسودان</p>
+</main>
+<script src="app.js"></script></body></html>
