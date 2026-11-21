@@ -7,7 +7,7 @@
 :root{--red:#C1121F;--red2:#E23B2E;--sand:#F0E7D8;--ink:#08060A;--line:rgba(240,231,216,.14)}
 body{background:var(--ink);color:var(--sand);font:16px/1.55 system-ui,"Segoe UI",sans-serif;overflow-x:hidden}
 .scene{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:#0a0a1f;filter:saturate(115%) contrast(105%)}
-.veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(8,6,10,.55) 0%,rgba(8,6,10,.35) 40%,rgba(8,6,10,.9) 100%)}
+.veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(8,6,10,.35) 0%,rgba(8,6,10,.35) 40%,rgba(8,6,10,.9) 100%)}
 main{position:relative;z-index:2;max-width:560px;margin:auto;padding:20px 16px 60px}
 header{display:flex;justify-content:space-between;align-items:center;padding-bottom:26px}
 .brand{font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:7px}
@@ -49,12 +49,12 @@ button.go:disabled{opacity:.42;box-shadow:none;cursor:default}
 </style></head><body>
 <video class="scene" autoplay muted loop playsinline preload="auto"
  poster="https://cdn.pixabay.com/video/2022/12/28/144575-784867452_tiny.jpg">
-<source src="https://cdn.pixabay.com/video/2022/12/28/144575-784867452_large.mp4" type="video/mp4">
+<source src="https://cdn.pixabay.com/video/2022/12/28/144575-784867452_medium.mp4" type="video/mp4">
 </video>
 <div class="veil"></div>
 
 <main>
-<header><div class="brand">Sudan<b>Pay</b> 🇸🇩</div><span class="pill">بلا حساب · بلا KYC</span></header>
+<header><div class="brand" dir="ltr">Sudan<b>Pay</b> 🇸🇩</div><span class="pill">بلا حساب · بلا KYC</span></header>
 
 <section id="swap">
 <h1>بدّل بسرعة<br><em>النيل</em>. بلا حساب.</h1>
@@ -89,7 +89,7 @@ button.go:disabled{opacity:.42;box-shadow:none;cursor:default}
 <input type="hidden" id="type" value="fixed">
 <div class="fields">
 <input id="addr" placeholder="عنوان الاستلام">
-<input id="refund" placeholder="عنوان الاسترداد (اختياري)">
+<input id="refund" placeholder="عنوان الاسترداد — اختياري">
 </div>
 <div class="meta" id="m">أدخل مبلغاً لعرض السعر</div>
 <button class="go" id="go" disabled>ابدأ التبديل</button>
@@ -110,4 +110,4 @@ button.go:disabled{opacity:.42;box-shadow:none;cursor:default}
 
 <p class="foot">SudanPay واجهة مستقلة · التنفيذ والاسترداد عبر <a href="https://ff.io" rel="noopener">FixedFloat</a><br>🇸🇩 صُنع للسودان</p>
 </main>
-<script src="app.js"></script></body></html>
+<script src="app.js?v=3"></script></body></html>
