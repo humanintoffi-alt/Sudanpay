@@ -14,6 +14,7 @@ async function q() {
     const d = await r.json();
     if (d.e) return set("#m", d.e);
     if (d.errors && d.errors.length) return set("#m", d.errors.join(" · "));
+    $("#out").value = d.to.amount;
     set("#m", "تستلم " + d.to.amount + " " + to + " — السعر " + d.to.rate);
     $("#go").disabled = false;
   } catch { set("#m", "تعذّر جلب السعر"); }
@@ -25,7 +26,6 @@ $("#flip").onclick = () => { const v = $("#f").value; $("#f").value = $("#t").va
 $("#go").onclick = async () => {
   const payout = $("#addr").value.trim(), refund = $("#refund").value.trim();
   if (!payout) return set("#m", "أدخل عنوان الاستلام");
-  if (!refund) return set("#m", "أدخل عنوان الاسترداد — إجباري");
   $("#go").disabled = true;
   try {
     const r = await fetch(API + "/order", { method: "POST",
@@ -74,7 +74,7 @@ $("#keep").onclick = async () => {
 $("#back").onclick = async () => {
   const o = JSON.parse(localStorage.getItem("last"));
   await fetch(API + "/emergency", { method: "POST", headers: { "content-type": "application/json" },
-    body: JSON.stringify({ id: o.id, token: o.token, choice: "REFUND", address: o.refund }) });
+    body: JSON.stringify({ id: o.id, token: o.token, choice: "REFUND", address: o.refund || prompt("refund address") }) });
   $("#em").hidden = true; poll(o);
 };
 
@@ -99,3 +99,14 @@ addEventListener("pointermove", e => {
   const x = (e.clientX / innerWidth - .5) * 2;
   document.querySelectorAll("[data-d]").forEach(n => n.style.transform = "translateX(" + (-x * 46 * +n.dataset.d) + "px)");
 }, { passive: true });
+
+const MAPX = { BTC:["btc","₿"], ETH:["eth","Ξ"], USDT:["usdt","₮"], USDC:["usdc","$"],
+  XMR:["xmr","ɱ"], TRX:["trx","⟁"], SOL:["sol","◎"], LTC:["ltc","Ł"], DOGE:["doge","Ð"] };
+$("#t").innerHTML = $("#f").innerHTML;
+$("#t").value = "BTC";
+for (const sel of ["#f", "#t"]) for (const o of $(sel).options) {
+  const p = Object.keys(MAPX).find(k => o.value.startsWith(k));
+  if (p) ICON[o.value] = MAPX[p];
+}
+paint("#f", "#fi"); paint("#t", "#ti");
+$("#a").addEventListener("input", () => $("#out").value = "");
