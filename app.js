@@ -110,59 +110,44 @@ for (const sel of ["#f", "#t"]) for (const o of $(sel).options) {
 paint("#f", "#fi"); paint("#t", "#ti");
 $("#a").addEventListener("input", () => $("#out").value = "");
 
-const NAMES = {BTC:"Bitcoin",ETH:"Ethereum",USDT:"Tether",USDC:"USD Coin",XMR:"Monero",
-TRX:"Tron",BNB:"BNB",SOL:"Solana",LTC:"Litecoin",DOGE:"Dogecoin",BCH:"Bitcoin Cash",
-DASH:"Dash",ZEC:"Zcash",XRP:"Ripple",ADA:"Cardano",XLM:"Stellar",SUI:"Sui",APT:"Aptos",
-ATOM:"Cosmos",ETC:"Ethereum Classic",VET:"VeChain",XTZ:"Tezos",S:"Sonic",ARB:"Arbitrum",
-POL:"Polygon",AVAX:"Avalanche",GRAM:"Gram",KCS:"KuCoin Token",DOT:"Polkadot",
-WETH:"Wrapped ETH",WBNB:"Wrapped BNB",WSOL:"Wrapped SOL",TUSD:"TrueUSD",USDS:"USD Sky",
-PAXG:"PAX Gold",XAUT:"Tether Gold",PEPE:"Pepe",LINK:"Chainlink",SHIB:"SHIB",
-AAVE:"Aave",CAKE:"PancakeSwap",TWT:"Trust Wallet",BTT:"BitTorrent"};
-const nm = v => { const k = Object.keys(NAMES).find(x => v.startsWith(x)); return k ? NAMES[k] : v; };
-const bd = v => { for (const [k, l] of [["C-CHAIN","AVAX"],["OPTIMISM","OP"],["ARBITRUM","ARB"],
-["POLYGON","POL"],["BASE","BASE"],["TRX","TRX"],["ETH","ETH"],["BSC","BSC"],["SOL","SOL"],
-["TON","TON"],["LN","LN"]]) if (v.endsWith(k)) return l; return ""; };
-const AR = {Bitcoin:"بيتكوين",Ethereum:"إيثيريوم",Tron:"ترون",Solana:"سولانا",Polygon:"بوليجون",Arbitrum:"أربيتروم",Optimism:"أوبتيميزم",Avalanche:"أفالانش",Other:"أخرى",BNB:"بي إن بي",Base:"بيس"};
-const POP = ["BTC","BNBBSC","ETH","USDTETH","USDTTRX","XMR"];
+const NET = {ETH:"Ethereum",TRX:"Tron",BSC:"BNB Chain",SOL:"Solana",POL:"Polygon",
+ARB:"Arbitrum",BASE:"Base",OP:"Optimism",AVAX:"Avalanche",BTC:"Bitcoin",TON:"TON",
+LN:"Lightning",ADA:"Cardano",DOT:"Polkadot",XRP:"XRP",XLM:"Stellar",SUI:"Sui",APT:"Aptos"};
+const POP = ["BTC","ETH","USDTTRC","USDTETH","XMR","BNBBSC"];
 let target = "#f";
 
-const NETN = v => { for (const [k, l] of [["C-CHAIN","C-Chain"],["OPTIMISM","Optimism"],
-["ARBITRUM","Arbitrum"],["POLYGON","Polygon"],["BASE","Base"],["TRX","TRC20"],["ETH","ERC20"],
-["BSC","BEP20"],["SOL","Solana"],["TON","TON"],["LN","Lightning"]]) if (v.endsWith(k)) return l; return ""; };
-const tick = v => { const s = v.replace(/(C-CHAIN|OPTIMISM|ARBITRUM|POLYGON|BASE|TRX|ETH|BSC|SOL|TON|LN)$/, ""); return s || v; };
-function row(v) {
-  const d = document.createElement("div"); d.className = "item";
-  const [c, g] = ICON[v] || ["btc", "?"];
-  const n = NETN(v), bg = bd(v);
+function row(o) {
+  const v = o.value, d = document.createElement("div"); d.className = "item";
   const lg = document.createElement("span"); lg.className = "lg";
-  const fb = document.createElement("span"); fb.className = "ico " + c; fb.textContent = g;
-  lg.append(fb);
-  const img = new Image();
-  img.className = "logo"; img.alt = ""; img.loading = "lazy";
-  img.src = "https://ff.io/assets/images/coins/svg/" + tick(v).toLowerCase().replace(/[^a-z0-9]/g, "") + ".svg";
-  img.onload = () => fb.remove(); img.onerror = () => img.remove();
-  lg.append(img); d.append(lg);
-  const txt = document.createElement("span"); txt.className = "nm";
-  txt.innerHTML = nm(v) + (n ? ' <small>(' + n + ')</small>' : ''); d.append(txt);
-  const rt = document.createElement("span"); rt.className = "rt";
-  rt.innerHTML = '<b>' + tick(v) + '</b>' + (bg ? '<em class="bdg">' + bg + '</em>' : '');
-  d.append(rt);
+  const fb = document.createElement("span"); fb.className = "ico";
+  fb.textContent = (o.dataset.k || v).charAt(0); lg.append(fb);
+  if (o.dataset.l) {
+    const img = new Image(); img.className = "logo"; img.alt = ""; img.loading = "lazy";
+    img.src = o.dataset.l; img.onload = () => fb.remove(); img.onerror = () => img.remove();
+    lg.append(img);
+  }
+  d.append(lg);
+  const t = document.createElement("span"); t.className = "nm";
+  t.textContent = o.dataset.n || v; d.append(t);
+  const r = document.createElement("span"); r.className = "rt";
+  r.innerHTML = '<b>' + (o.dataset.k || v) + '</b>' + (o.dataset.b ? '<em class="bdg">' + o.dataset.b + '</em>' : '');
+  d.append(r);
   d.onclick = () => { $(target).value = v; $(target).dispatchEvent(new Event("change")); closeSheet(); };
   return d;
 }
 function buildList(f) {
   const L = $("#list"); L.innerHTML = ""; f = (f || "").trim().toLowerCase();
+  const all = [...$("#f").options];
   if (!f) {
     const h = document.createElement("div"); h.className = "grp"; h.textContent = "Popular currencies"; L.append(h);
-    POP.forEach(v => L.append(row(v)));
+    POP.forEach(c => { const o = all.find(x => x.value === c); if (o) L.append(row(o)); });
     const h2 = document.createElement("div"); h2.className = "grp"; h2.textContent = "All currencies"; L.append(h2);
   }
   for (const g of $("#f").querySelectorAll("optgroup")) for (const o of g.children) {
-    const v = o.value;
-    const hay = (v + " " + nm(v) + " " + NETN(v) + " " + tick(v) + " " + g.label + " " + (AR[g.label] || "")).toLowerCase();
+    if (!f && POP.includes(o.value)) continue;
+    const hay = (o.value + " " + (o.dataset.n || "") + " " + (NET[o.dataset.b] || "") + " " + g.label).toLowerCase();
     if (f && !hay.includes(f)) continue;
-    if (!f && POP.includes(v)) continue;
-    L.append(row(v));
+    L.append(row(o));
   }
 }
 function openSheet(t) { target = t; buildList(""); $("#q").value = ""; $("#sheet").classList.remove("hid"); setTimeout(() => $("#q").focus(), 60); }

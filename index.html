@@ -109,17 +109,130 @@ display:flex;flex-direction:column;padding:16px;max-width:560px;margin:auto}
 <div class="row">
 <button class="pick" id="fp"><span class="ico btc" id="fi">₿</span><b id="fn">USDT</b></button>
 <select id="f" class="hid">
-<optgroup label="Bitcoin"><option value="BTC">BTC</option><option value="BTCLN">BTC · Lightning</option></optgroup>
-<optgroup label="Ethereum"><option value="ETH">ETH</option><option value="USDTETH">USDT · ERC20</option><option value="USDCETH">USDC · ERC20</option><option value="WETHETH">WETH</option><option value="PEPEETH">PEPE</option><option value="LINKETH">LINK</option><option value="SHIBETH">SHIB</option><option value="AAVEETH">AAVE</option><option value="PAXGETH">PAXG</option><option value="XAUTETH">XAUT</option><option value="TUSDETH">TUSD</option><option value="USDSETH">USDS</option><option value="POLETH">POL</option></optgroup>
-<optgroup label="Tron"><option value="TRX">TRX</option><option value="USDTTRX" selected>USDT · TRC20</option><option value="BTTTRX">BTT</option></optgroup>
-<optgroup label="BNB Chain"><option value="BNBBSC">BNB</option><option value="USDTBSC">USDT · BEP20</option><option value="USDCBSC">USDC · BEP20</option><option value="BTCBSC">BTC · BEP20</option><option value="WBNBBSC">WBNB</option><option value="CAKEBSC">CAKE</option><option value="TWTBSC">TWT</option></optgroup>
-<optgroup label="Solana"><option value="SOL">SOL</option><option value="USDTSOL">USDT · SOL</option><option value="USDCSOL">USDC · SOL</option><option value="WSOLSOL">WSOL</option></optgroup>
-<optgroup label="Polygon"><option value="POLPOLYGON">POL</option><option value="USDTPOLYGON">USDT · Polygon</option><option value="USDC POLYGON">USDC · Polygon</option><option value="WETHPOLYGON">WETH · Polygon</option></optgroup>
-<optgroup label="Arbitrum"><option value="ARBARBITRUM">ARB</option><option value="USDTARBITRUM">USDT · Arbitrum</option><option value="USDCARBITRUM">USDC · Arbitrum</option><option value="ETHARBITRUM">ETH · Arbitrum</option><option value="WETHARBITRUM">WETH · Arbitrum</option></optgroup>
-<optgroup label="Base"><option value="ETHBASE">ETH · Base</option><option value="USDCBASE">USDC · Base</option><option value="WETHBASE">WETH · Base</option></optgroup>
-<optgroup label="Optimism"><option value="ETHOPTIMISM">ETH · Optimism</option><option value="USDTOPTIMISM">USDT · Optimism</option><option value="USDCOPTIMISM">USDC · Optimism</option></optgroup>
-<optgroup label="Avalanche"><option value="AVAXC-CHAIN">AVAX</option><option value="USDTC-CHAIN">USDT · AVAX</option><option value="USDCC-CHAIN">USDC · AVAX</option></optgroup>
-<optgroup label="Other"><option value="XMR">XMR</option><option value="LTC">LTC</option><option value="DOGE">DOGE</option><option value="DASH">DASH</option><option value="ZEC">ZEC</option><option value="XRP">XRP</option><option value="ADA">ADA</option><option value="XLM">XLM</option><option value="SUI">SUI</option><option value="APT">APT</option><option value="ATOM">ATOM</option><option value="ETC">ETC</option><option value="VET">VET</option><option value="XTZ">XTZ</option><option value="S">S</option><option value="GRAMTON">GRAM · TON</option><option value="USDTTON">USDT · TON</option><option value="KCSKCC">KCS</option><option value="DOTAsset Hub">DOT</option><option value="BCH">BCH</option><option value="ZEC">ZEC</option></optgroup>
+<optgroup label="Ethereum">
+<option value="AAVEETH" data-n="Aave (ERC20)" data-k="AAVE" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/aaveeth.svg">AAVEETH</option>
+<option value="LINK" data-n="Chainlink (ERC20)" data-k="LINK" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/link.svg">LINK</option>
+<option value="PAXGETH" data-n="PAX Gold (ERC20)" data-k="PAXG" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/paxgeth.svg">PAXGETH</option>
+<option value="PEPEETH" data-n="Pepe (ERC20)" data-k="PEPE" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/pepeeth.svg">PEPEETH</option>
+<option value="POLETH" data-n="Polygon (ERC20)" data-k="POL" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/poleth.svg">POLETH</option>
+<option value="SHIB" data-n="SHIBA INU (ERC20)" data-k="SHIB" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/shib.svg">SHIB</option>
+<option value="XAUTETH" data-n="Tether Gold (ERC20)" data-k="XAUT" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/xauteth.svg">XAUTETH</option>
+<option value="TUSD" data-n="TrueUSD (ERC20)" data-k="TUSD" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/tusd.svg">TUSD</option>
+<option value="USDCETH" data-n="USD Coin (ERC20)" data-k="USDC" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/usdceth.svg">USDCETH</option>
+<option value="USDSETH" data-n="USD Sky (ERC20)" data-k="USDS" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/usdseth.svg">USDSETH</option>
+<option value="WETHETH" data-n="Wrapped ETH (ERC20)" data-k="ETH" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/wetheth_dark.svg">WETHETH</option>
+<option value="ETH" data-n="Ethereum" data-k="ETH" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/eth_dark.svg">ETH</option>
+<option value="USDT" data-n="Tether (ERC20)" data-k="USDT" data-b="ETH" data-l="https://ff.io/assets/images/coins/svg/usdt.svg">USDT</option>
+</optgroup>
+<optgroup label="BNB Chain">
+<option value="BTCBSC" data-n="Bitcoin (BEP20)" data-k="BTC" data-b="BSC" data-l="https://ff.io/assets/images/coins/svg/btcbsc.svg">BTCBSC</option>
+<option value="ETHBSC" data-n="Ethereum (BEP20)" data-k="ETH" data-b="BSC" data-l="https://ff.io/assets/images/coins/svg/ethbsc_dark.svg">ETHBSC</option>
+<option value="CAKE" data-n="PancakeSwap (BEP20)" data-k="CAKE" data-b="BSC" data-l="https://ff.io/assets/images/coins/svg/cake.svg">CAKE</option>
+<option value="USDTBSC" data-n="Tether (BEP20)" data-k="USDT" data-b="BSC" data-l="https://ff.io/assets/images/coins/svg/usdtbsc.svg">USDTBSC</option>
+<option value="TWTBSC" data-n="Trust Wallet Token (BEP20)" data-k="TWT" data-b="BSC" data-l="https://ff.io/assets/images/coins/svg/twtbsc.svg">TWTBSC</option>
+<option value="WBNBBSC" data-n="Wrapped BNB (BEP20)" data-k="BNB" data-b="BSC" data-l="https://ff.io/assets/images/coins/svg/wbnbbsc.svg">WBNBBSC</option>
+<option value="BSC" data-n="BNB Smart Chain (BEP20)" data-k="BNB" data-b="BSC" data-l="https://ff.io/assets/images/coins/svg/bsc.svg">BSC</option>
+</optgroup>
+<optgroup label="ARBITRUM">
+<option value="ARB" data-n="Arbitrum (Arbitrum)" data-k="ARB" data-b="ARBITRUM" data-l="https://ff.io/assets/images/coins/svg/arb.svg">ARB</option>
+<option value="ETHARBITRUM" data-n="Ethereum (Arbitrum)" data-k="ETH" data-b="ARBITRUM" data-l="https://ff.io/assets/images/coins/svg/etharbitrum_dark.svg">ETHARBITRUM</option>
+<option value="USDTARBITRUM" data-n="Tether (Arbitrum)" data-k="USDT" data-b="ARBITRUM" data-l="https://ff.io/assets/images/coins/svg/usdtarbitrum.svg">USDTARBITRUM</option>
+<option value="USDCARBITRUM" data-n="USD Coin (Arbitrum)" data-k="USDC" data-b="ARBITRUM" data-l="https://ff.io/assets/images/coins/svg/usdcarbitrum.svg">USDCARBITRUM</option>
+<option value="WETHARBITRUM" data-n="Wrapped ETH (Arbitrum)" data-k="ETH" data-b="ARBITRUM" data-l="https://ff.io/assets/images/coins/svg/wetharbitrum_dark.svg">WETHARBITRUM</option>
+</optgroup>
+<optgroup label="Solana">
+<option value="SOL" data-n="Solana" data-k="SOL" data-b="SOL" data-l="https://ff.io/assets/images/coins/svg/sol.svg">SOL</option>
+<option value="USDTSOL" data-n="Tether (Solana)" data-k="USDT" data-b="SOL" data-l="https://ff.io/assets/images/coins/svg/usdtsol.svg">USDTSOL</option>
+<option value="USDCSOL" data-n="USD Coin (Solana)" data-k="USDC" data-b="SOL" data-l="https://ff.io/assets/images/coins/svg/usdcsol.svg">USDCSOL</option>
+<option value="WSOL" data-n="Wrapped SOL (Solana)" data-k="SOL" data-b="SOL" data-l="https://ff.io/assets/images/coins/svg/wsol.svg">WSOL</option>
+</optgroup>
+<optgroup label="AVAXC">
+<option value="AVAX" data-n="Avalanche (C-Chain)" data-k="AVAX" data-b="AVAXC" data-l="https://ff.io/assets/images/coins/svg/avax.svg">AVAX</option>
+<option value="USDTAVAX" data-n="Tether (C-Chain)" data-k="USDT" data-b="AVAXC" data-l="https://ff.io/assets/images/coins/svg/usdtavax.svg">USDTAVAX</option>
+<option value="USDCAVAX" data-n="USD Coin (C-Chain)" data-k="USDC" data-b="AVAXC" data-l="https://ff.io/assets/images/coins/svg/usdcavax.svg">USDCAVAX</option>
+</optgroup>
+<optgroup label="Tron">
+<option value="BTT" data-n="BitTorrent" data-k="BTT" data-b="TRX" data-l="https://ff.io/assets/images/coins/svg/btt_dark.svg">BTT</option>
+<option value="TRX" data-n="Tron" data-k="TRX" data-b="TRX" data-l="https://ff.io/assets/images/coins/svg/trx.svg">TRX</option>
+<option value="USDTTRC" data-n="Tether (TRC20)" data-k="USDT" data-b="TRX" data-l="https://ff.io/assets/images/coins/svg/usdttrc.svg" selected>USDTTRC</option>
+</optgroup>
+<optgroup label="Base">
+<option value="ETHBASE" data-n="Ethereum (Base)" data-k="ETH" data-b="BASE" data-l="https://ff.io/assets/images/coins/svg/ethbase_dark.svg">ETHBASE</option>
+<option value="USDCBASE" data-n="USD Coin (Base)" data-k="USDC" data-b="BASE" data-l="https://ff.io/assets/images/coins/svg/usdcbase.svg">USDCBASE</option>
+<option value="WETHBASE" data-n="Wrapped ETH (Base)" data-k="ETH" data-b="BASE" data-l="https://ff.io/assets/images/coins/svg/wethbase_dark.svg">WETHBASE</option>
+</optgroup>
+<optgroup label="MATIC">
+<option value="POL" data-n="Polygon" data-k="POL" data-b="MATIC" data-l="https://ff.io/assets/images/coins/svg/pol.svg">POL</option>
+<option value="USDTMATIC" data-n="Tether (Polygon)" data-k="USDT" data-b="MATIC" data-l="https://ff.io/assets/images/coins/svg/usdtmatic.svg">USDTMATIC</option>
+<option value="USDCMATIC" data-n="USD Coin (Polygon)" data-k="USDC" data-b="MATIC" data-l="https://ff.io/assets/images/coins/svg/usdcmatic.svg">USDCMATIC</option>
+</optgroup>
+<optgroup label="Optimism">
+<option value="ETHOP" data-n="Ethereum (Optimism)" data-k="ETH" data-b="OP" data-l="https://ff.io/assets/images/coins/svg/ethop_dark.svg">ETHOP</option>
+<option value="USDCOP" data-n="USDC (Optimism)" data-k="USDC" data-b="OP" data-l="https://ff.io/assets/images/coins/svg/usdcop.svg">USDCOP</option>
+</optgroup>
+<optgroup label="Aptos">
+<option value="APT" data-n="Aptos" data-k="APT" data-b="APT" data-l="https://ff.io/assets/images/coins/svg/apt_dark.svg">APT</option>
+</optgroup>
+<optgroup label="OPBNB">
+<option value="BNBOPBNB" data-n="BNB (opBNB)" data-k="BNB" data-b="OPBNB" data-l="https://ff.io/assets/images/coins/svg/bnbopbnb.svg">BNBOPBNB</option>
+</optgroup>
+<optgroup label="Lightning">
+<option value="BTCLN" data-n="Bitcoin (Lightning)" data-k="BTC" data-b="LN" data-l="https://ff.io/assets/images/coins/svg/btcln.svg">BTCLN</option>
+</optgroup>
+<optgroup label="BCH">
+<option value="BCH" data-n="Bitcoin Cash" data-k="BCH" data-b="BCH" data-l="https://ff.io/assets/images/coins/svg/bch.svg">BCH</option>
+</optgroup>
+<optgroup label="Cosmos">
+<option value="ATOM" data-n="Cosmos" data-k="ATOM" data-b="ATOM" data-l="https://ff.io/assets/images/coins/svg/atom_dark.svg">ATOM</option>
+</optgroup>
+<optgroup label="DASH">
+<option value="DASH" data-n="Dash" data-k="DASH" data-b="DASH" data-l="https://ff.io/assets/images/coins/svg/dash.svg">DASH</option>
+</optgroup>
+<optgroup label="DOGE">
+<option value="DOGE" data-n="Dogecoin" data-k="DOGE" data-b="DOGE" data-l="https://ff.io/assets/images/coins/svg/doge.svg">DOGE</option>
+</optgroup>
+<optgroup label="ZKSYNC">
+<option value="ETHZKSYNC" data-n="Ethereum (ZkSync)" data-k="ETH" data-b="ZKSYNC" data-l="https://ff.io/assets/images/coins/svg/ethzksync_dark.svg">ETHZKSYNC</option>
+</optgroup>
+<optgroup label="ETC">
+<option value="ETC" data-n="Ethereum Classic" data-k="ETC" data-b="ETC" data-l="https://ff.io/assets/images/coins/svg/etc.svg">ETC</option>
+</optgroup>
+<optgroup label="TON">
+<option value="GRAMTON" data-n="Gram" data-k="GRAM" data-b="TON" data-l="https://ff.io/assets/images/coins/svg/gramton.svg">GRAMTON</option>
+</optgroup>
+<optgroup label="KCC">
+<option value="KCS" data-n="KuCoin Token" data-k="KCS" data-b="KCC" data-l="https://ff.io/assets/images/coins/svg/kcs.svg">KCS</option>
+</optgroup>
+<optgroup label="LTC">
+<option value="LTC" data-n="Litecoin" data-k="LTC" data-b="LTC" data-l="https://ff.io/assets/images/coins/svg/ltc.svg">LTC</option>
+</optgroup>
+<optgroup label="DOTAH">
+<option value="DOTAH" data-n="Polkadot (Asset Hub)" data-k="DOT" data-b="DOTAH" data-l="https://ff.io/assets/images/coins/svg/dotah.svg">DOTAH</option>
+</optgroup>
+<optgroup label="XRP">
+<option value="XRP" data-n="Ripple" data-k="XRP" data-b="XRP" data-l="https://ff.io/assets/images/coins/svg/xrp.svg">XRP</option>
+</optgroup>
+<optgroup label="S">
+<option value="S" data-n="Sonic" data-k="S" data-b="S" data-l="https://ff.io/assets/images/coins/svg/s.svg">S</option>
+</optgroup>
+<optgroup label="Stellar">
+<option value="XLM" data-n="Stellar Lumens" data-k="XLM" data-b="XLM" data-l="https://ff.io/assets/images/coins/svg/xlm_dark.svg">XLM</option>
+</optgroup>
+<optgroup label="XTZ">
+<option value="XTZ" data-n="Tezos" data-k="XTZ" data-b="XTZ" data-l="https://ff.io/assets/images/coins/svg/xtz.svg">XTZ</option>
+</optgroup>
+<optgroup label="VET">
+<option value="VET" data-n="VeChain" data-k="VET" data-b="VET" data-l="https://ff.io/assets/images/coins/svg/vet.svg">VET</option>
+</optgroup>
+<optgroup label="ZEC">
+<option value="ZEC" data-n="Zcash" data-k="ZEC" data-b="ZEC" data-l="https://ff.io/assets/images/coins/svg/zec.svg">ZEC</option>
+</optgroup>
+<optgroup label="XMR">
+<option value="XMR" data-n="Monero" data-k="XMR" data-b="XMR" data-l="https://ff.io/assets/images/coins/svg/xmr.svg">XMR</option>
+</optgroup>
+<optgroup label="Bitcoin">
+<option value="BTC" data-n="Bitcoin" data-k="BTC" data-b="BTC" data-l="https://ff.io/assets/images/coins/svg/btc.svg">BTC</option>
+</optgroup>
 </select>
 <input id="a" inputmode="decimal" placeholder="0.00">
 </div>
@@ -157,4 +270,4 @@ display:flex;flex-direction:column;padding:16px;max-width:560px;margin:auto}
 <p class="foot">التنفيذ والاسترداد عبر FixedFloat<br>🇸🇩 صُنع للسودان</p>
 </main>
 <div class="sheet hid" id="sheet"><button class="x" id="x">✕</button><input id="q" placeholder="اكتب عملة أو شبكة…" autocomplete="off"><div id="list"></div></div>
-<script src="app.js?v=19"></script></body></html>
+<script src="app.js?v=20"></script></body></html>
