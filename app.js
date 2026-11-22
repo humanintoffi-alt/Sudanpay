@@ -94,8 +94,15 @@ $("#new").onclick = () => { $("#view").hidden = true; $("#swap").hidden = false;
 
 const ICON = { BTC:["btc","₿"], USDTTRC:["usdt","₮"], ETH:["eth","Ξ"], XMR:["xmr","ɱ"], TRX:["trx","⟁"] };
 function paint(sel, ic) {
-  const v = $(sel).value, [c, g] = ICON[v] || ["btc", "?"];
-  $(ic).className = "ico " + c; $(ic).textContent = g;
+  const o = $(sel).selectedOptions[0], btn = $(ic) && $(ic).closest(".pick");
+  if (!o || !btn) return;
+  const k = o.dataset.k || o.value;
+  btn.innerHTML = '<span class="lg"><span class="ico">' + k[0] + '</span></span><b>' + (o.dataset.n || o.value) + '</b>';
+  if (o.dataset.l) {
+    const im = new Image(); im.className = "logo"; im.src = o.dataset.l;
+    im.onload = () => { const f = btn.querySelector(".ico"); if (f) f.remove(); };
+    btn.querySelector(".lg").append(im);
+  }
 }
 paint("#f", "#fi"); paint("#t", "#ti");
 $("#f").addEventListener("change", () => paint("#f", "#fi"));
@@ -166,9 +173,9 @@ $("#fp").onclick = () => openSheet("#f");
 $("#tp").onclick = () => openSheet("#t");
 $("#x").onclick = closeSheet;
 $("#q").oninput = e => buildList(e.target.value);
-$("#f").addEventListener("change", () => { $("#fn").textContent = $("#f").value; });
-$("#t").addEventListener("change", () => { $("#tn").textContent = $("#t").value; });
-$("#fn").textContent = $("#f").value; $("#tn").textContent = $("#t").value;
+$("#f").addEventListener("change", () => paint("#f", "#fi"));
+$("#t").addEventListener("change", () => paint("#t", "#ti"));
+paint("#f", "#fi"); paint("#t", "#ti");
 
 addEventListener("error", e => {
   const b = document.createElement("div");
