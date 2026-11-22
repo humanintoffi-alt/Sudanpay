@@ -93,8 +93,9 @@ $("#new").onclick = () => { $("#view").hidden = true; $("#swap").hidden = false;
 
 
 const ICON = { BTC:["btc","₿"], USDTTRC:["usdt","₮"], ETH:["eth","Ξ"], XMR:["xmr","ɱ"], TRX:["trx","⟁"] };
-function paint(sel, ic) {
-  const o = $(sel).selectedOptions[0], btn = $(ic) && $(ic).closest(".pick");
+function paint(sel) {
+  const o = $(sel).selectedOptions[0];
+  const btn = document.querySelector(sel === "#f" ? "#fp" : "#tp");
   if (!o || !btn) return;
   const k = o.dataset.k || o.value;
   const GL = {BTC:"₿",ETH:"Ξ",USDT:"₮",USDC:"$",XMR:"ɱ",TRX:"⟁",SOL:"◎",LTC:"Ł",DOGE:"Ð"};
