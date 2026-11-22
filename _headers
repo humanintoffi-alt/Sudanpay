@@ -1,0 +1,6 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Content-Security-Policy: default-src 'none'; img-src 'self' data: https://ff.io https://api.qrserver.com https://cdn.pixabay.com; media-src https://cdn.pixabay.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src https://shiny-forest-0e9d.humanint-offi.workers.dev; base-uri 'none'; form-action 'none'
