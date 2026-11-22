@@ -1,4 +1,4 @@
-const API = "REPLACE_ME";
+const API = "https://shiny-forest-0e9d.humanint-offi.workers.dev";
 const $ = s => document.querySelector(s);
 const set = (s, v) => { $(s).textContent = v; };
 let t = null;
