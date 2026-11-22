@@ -2,6 +2,7 @@ const API = "https://shiny-forest-0e9d.humanint-offi.workers.dev";
 const $ = s => document.querySelector(s);
 const set = (s, v) => { $(s).textContent = v; };
 let t = null;
+const FEE = 0.004;
 const EM = {MAINTENANCE_FROM:"عملة الإرسال تحت الصيانة",MAINTENANCE_TO:"عملة الاستلام تحت الصيانة",
 OFFLINE_FROM:"عملة الإرسال متوقفة",OFFLINE_TO:"عملة الاستلام متوقفة",
 RESERVE_FROM:"احتياطي عملة الإرسال غير كافٍ",RESERVE_TO:"احتياطي عملة الاستلام غير كافٍ",
@@ -21,8 +22,9 @@ async function q() {
     const d = await r.json();
     if (d.e) return set("#m", T(d.e));
     if (d.errors && d.errors.length) return set("#m", d.errors.map(T).join(" · "));
-    $("#out").value = d.to.amount;
-    set("#m", "تستلم " + d.to.amount + " " + to + " — السعر " + d.to.rate);
+    const net = +(d.to.amount * (1 - FEE)).toFixed(8);
+    $("#out").value = net;
+    set("#m", "تستلم " + net + " " + to);
     $("#go").disabled = false;
   } catch { set("#m", "تعذّر جلب السعر"); }
 }
@@ -34,7 +36,8 @@ $("#flip").onclick = () => {
 };
 
 $("#go").onclick = async () => {
-  const payout = $("#addr").value.trim(), refund = $("#refund").value.trim();
+  const payout = $("#addr").value.trim(), email = $("#email").value.trim();
+  if (!/^\d{1,18}(\.\d{1,12})?$/.test($("#a").value.trim())) return set("#m", "مبلغ غير صالح");
   if (!/^[A-Za-z0-9:_\-.]{8,160}$/.test(payout)) return set("#m", "عنوان الاستلام غير صالح");
   $("#go").disabled = true;
   try {
@@ -44,9 +47,11 @@ $("#go").onclick = async () => {
         amount: $("#a").value, type: $("#type").value, payout }) });
     const o = await r.json();
     if (o.e) { $("#go").disabled = false; return set("#m", T(o.e)); }
-    o.refund = refund;
+    o.email = email;
+    if (email) fetch(API + "/email", { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ id: o.id, token: o.token, email }) }).catch(() => {});
     localStorage.setItem("last", JSON.stringify(o));
-    location.href = "order.html?id=" + o.id;
+    setTimeout(() => location.assign("order.html?id=" + o.id), 60);
   } catch { $("#go").disabled = false; set("#m", "فشل إنشاء الطلب"); }
 };
 function show(o) {
