@@ -2,6 +2,13 @@ const API = "https://shiny-forest-0e9d.humanint-offi.workers.dev";
 const $ = s => document.querySelector(s);
 const set = (s, v) => { $(s).textContent = v; };
 let t = null;
+const EM = {MAINTENANCE_FROM:"عملة الإرسال تحت الصيانة",MAINTENANCE_TO:"عملة الاستلام تحت الصيانة",
+OFFLINE_FROM:"عملة الإرسال متوقفة",OFFLINE_TO:"عملة الاستلام متوقفة",
+RESERVE_FROM:"احتياطي عملة الإرسال غير كافٍ",RESERVE_TO:"احتياطي عملة الاستلام غير كافٍ",
+LIMIT_MIN:"المبلغ أقل من الحد الأدنى",LIMIT_MAX:"المبلغ أكبر من الحد الأعلى",
+in:"بيانات غير صالحة",rate:"محاولات كثيرة، انتظر قليلاً",origin:"مصدر غير مسموح",
+amount:"مبلغ غير صالح",address:"عنوان غير صالح",order:"طلب غير صالح",json:"طلب غير صالح",ccy:"عملة غير مدعومة"};
+const T = x => EM[x] || x;
 
 async function q() {
   const frm = $("#f").value, to = $("#t").value, amount = $("#a").value.trim();
@@ -12,8 +19,8 @@ async function q() {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ frm, to, amount, type: $("#type").value }) });
     const d = await r.json();
-    if (d.e) return set("#m", d.e);
-    if (d.errors && d.errors.length) return set("#m", d.errors.join(" · "));
+    if (d.e) return set("#m", T(d.e));
+    if (d.errors && d.errors.length) return set("#m", d.errors.map(T).join(" · "));
     $("#out").value = d.to.amount;
     set("#m", "تستلم " + d.to.amount + " " + to + " — السعر " + d.to.rate);
     $("#go").disabled = false;
@@ -21,7 +28,10 @@ async function q() {
 }
 $("#a").addEventListener("input", () => { $("#go").disabled = true; clearTimeout(t); t = setTimeout(q, 500); });
 ["#f", "#t", "#type"].forEach(s => $(s).addEventListener("change", q));
-$("#flip").onclick = () => { const v = $("#f").value; $("#f").value = $("#t").value; $("#t").value = v; q(); };
+$("#flip").onclick = () => {
+  const v = $("#f").value; $("#f").value = $("#t").value; $("#t").value = v;
+  $("#f").dispatchEvent(new Event("change")); $("#t").dispatchEvent(new Event("change")); q();
+};
 
 $("#go").onclick = async () => {
   const payout = $("#addr").value.trim(), refund = $("#refund").value.trim();
@@ -33,7 +43,7 @@ $("#go").onclick = async () => {
       body: JSON.stringify({ frm: $("#f").value, to: $("#t").value,
         amount: $("#a").value, type: $("#type").value, payout }) });
     const o = await r.json();
-    if (o.e) { $("#go").disabled = false; return set("#m", o.e); }
+    if (o.e) { $("#go").disabled = false; return set("#m", T(o.e)); }
     o.refund = refund;
     localStorage.setItem("last", JSON.stringify(o));
     location.href = "order.html?id=" + o.id;
