@@ -49,7 +49,7 @@ background:rgba(226,59,46,.1);border:1px solid rgba(226,59,46,.35);border-radius
 <div class="netline"><span>الشبكة</span><b id="net">—</b></div>
 <div class="addr"><span id="dep">—</span><button id="cp">نسخ</button></div>
 <img class="qr" id="qr" width="168" height="168" alt="QR">
-<div class="clock" id="clk"></div>
+<div class="clock" id="clk"></div><button class="gh" id="rf" style="margin-top:10px">تحديث الحالة</button>
 </div>
 
 <div class="card" id="tl">
@@ -106,8 +106,10 @@ $("#cp").onclick = async () => {
 };
 
 let left = o.left || 600;
+const fmt = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
 const tick = setInterval(() => {
-  left--; $("#clk").textContent = "متبقٍ " + Math.max(left, 0) + " ثانية" + (left <= 0 ? " — انتهى الوقت" : "");
+  left--;
+  $("#clk").textContent = left > 0 ? "متبقٍ " + fmt(left) : "انتهى الوقت";
   if (left <= 0) clearInterval(tick);
 }, 1000);
 
@@ -130,11 +132,12 @@ async function poll() {
       body: JSON.stringify({ id: o.id, token: o.token }) });
     const d = await r.json();
     paint(d.status || "");
-    if (!["DONE","EXPIRED"].includes(d.status)) setTimeout(poll, 15000);
+    if (!["DONE","EXPIRED"].includes(d.status)) setTimeout(poll, 5000);
     else if (d.status === "DONE") { clearInterval(tick); $("#clk").textContent = "اكتمل الطلب ✓"; }
-  } catch (e) { setTimeout(poll, 20000); }
+  } catch (e) { setTimeout(poll, 8000); }
 }
 paint("NEW"); poll();
+$("#rf").onclick = () => poll();
 
 $("#keep").onclick = async () => {
   await fetch(API + "/emergency", { method: "POST", headers: { "content-type": "application/json" },
