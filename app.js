@@ -97,7 +97,9 @@ function paint(sel, ic) {
   const o = $(sel).selectedOptions[0], btn = $(ic) && $(ic).closest(".pick");
   if (!o || !btn) return;
   const k = o.dataset.k || o.value;
-  btn.innerHTML = '<span class="lg"><span class="ico">' + k[0] + '</span></span><b>' + (o.dataset.n || o.value) + '</b>';
+  const GL = {BTC:"₿",ETH:"Ξ",USDT:"₮",USDC:"$",XMR:"ɱ",TRX:"⟁",SOL:"◎",LTC:"Ł",DOGE:"Ð"};
+  btn.innerHTML = '<span class="lg"><span class="ico">' + (GL[k] || k[0]) + '</span></span><b>' + k +
+    '</b>' + (o.dataset.b ? '<em class="bdg">' + o.dataset.b + '</em>' : '');
   if (o.dataset.l) {
     const im = new Image(); im.className = "logo"; im.src = o.dataset.l;
     im.onload = () => { const f = btn.querySelector(".ico"); if (f) f.remove(); };
